@@ -4,7 +4,7 @@ Chemical Equation Balancer v1.0
 Created by Joniel Augustine Jerome
 12/17/2022
 
-The program parses an inputed unbalanced chemical equation lacking coefficients and 
+The program parses an inputed unbalanced chemical equation lacking coefficients and
 uses a* search to assign the correct coefficients to each reactant and product.
 
 Feats:
@@ -29,6 +29,7 @@ import time
 
 alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 alpha_lower = alpha.lower()
+
 
 def equation(eqn):
     # This function separates the provided equation into proudcts and reactants lists
@@ -83,6 +84,7 @@ def equation(eqn):
     # It returns the two separated lists
     return reactant_list, product_list
 
+
 def combine(dict1, dict2):
     # This function combines two given dictionaries, adding up common values
     # This is used to sum up the atoms across all the reactants or all the products
@@ -98,6 +100,7 @@ def combine(dict1, dict2):
             ret[key] = dict2[key]
     return ret
 
+
 def add_multiplied(orig, addition, factor):
     # For compounds with parantheses and subscripts, this function adds the correct number of atoms
     # Ex. Mg3(PO4)2 has PO4 added with a factor of 2
@@ -107,6 +110,7 @@ def add_multiplied(orig, addition, factor):
             orig[key] += (addition[key] * factor)
         else:
             orig[key] = (addition[key] * factor)
+
 
 def count_atoms(compound):
     # This function parses and counts the number of atoms for a given compound
@@ -162,6 +166,7 @@ def count_atoms(compound):
     # It returns a dictionary of each atom within the compound and its corresponding count
     return symbols
 
+
 def compound_atoms(compound):
     # Given a compound, this function identifies the atoms it is composed of
     symbols = set()
@@ -179,6 +184,7 @@ def compound_atoms(compound):
     # It returns a set of the unique atomic symbols
     return symbols
 
+
 def score(r_list, p_list):
     # This function scores a given set of possible coefficients
     # This serves as the heuristic for the a* search
@@ -190,6 +196,7 @@ def score(r_list, p_list):
         return score * 1.2
     else:
         return score
+
 
 def possible_changes(r_list, p_list, r, p, r_counts, p_counts, r_atoms, p_atoms):
     # This function generates potential new coefficients for the equation based on the currently assigned coefficients
@@ -222,6 +229,7 @@ def possible_changes(r_list, p_list, r, p, r_counts, p_counts, r_atoms, p_atoms)
     # It returns a list of possible changes to the product and reactant coefficients
     return possiblesR, possiblesP
 
+
 def count_compounds(reactant_list, product_list, reactant_coefficients, product_coefficients):
     # This function counts the atoms in the products and reactants after adding coefficients to check for balance
 
@@ -238,6 +246,7 @@ def count_compounds(reactant_list, product_list, reactant_coefficients, product_
     
     # It returns a dictionary for both the reactants and the products mapping each atom to its count
     return reactant_counts, product_counts
+
 
 def simplify(coeffs):
     # This function simplifies the coefficients in the final equation if they have a common divisor
@@ -307,6 +316,7 @@ def main():
     print(p_coefficients[-1], end="\033[0m ")
     print(p_list[-1])
     print("Time Elapsed:", round(end-start,1), " seconds")
+
 
 def balance(reactant_list, product_list, reactant_coefficients, product_coefficients, reactant_atoms, product_atoms, start):
     # This function performs the a* star search to balance the equation
